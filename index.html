@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pramod Sayanekar — Fractional CTO & Technology Advisor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #070D1A;
+    --navy2: #0D1829;
+    --navy3: #132035;
+    --gold: #C9A050;
+    --gold2: #E5C47A;
+    --gold-dim: rgba(201,160,80,0.15);
+    --white: #F8F4EE;
+    --white2: #D8D2C8;
+    --steel: #4A7FAA;
+    --steel2: #6FA0C8;
+    --dim: rgba(248,244,238,0.55);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: linear-gradient(to bottom, rgba(7,13,26,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 600; letter-spacing: 0.05em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dim); text-decoration: none;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a.active { color: var(--gold); }
+  .nav-toggle {
+    display: none;
+    align-items: center; justify-content: center;
+    width: 2.75rem; height: 2.75rem;
+    padding: 0; border: 1px solid rgba(201,160,80,0.35);
+    background: rgba(13,24,41,0.6);
+    color: var(--gold);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav-toggle:hover { background: var(--gold-dim); border-color: var(--gold); }
+  .nav-toggle svg { width: 1.25rem; height: 1.25rem; }
+  .nav-toggle .icon-close { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-open { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+  .nav-cta {
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--navy);
+    background: var(--gold); border: none;
+    padding: 0.6rem 1.4rem; cursor: pointer;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+
+  /* ── PERSON (intro band) ── */
+  #person {
+    position: relative;
+    min-height: auto;
+    /* Clear fixed nav (~4.5–5rem) + safe area; overflow visible so display-serif ascenders aren’t clipped */
+    padding: max(5.75rem, calc(env(safe-area-inset-top, 0px) + 4.85rem)) 0 2.5rem;
+    overflow: visible;
+  }
+  .person-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Animated grid background */
+  #person::after {
+    content: '';
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(201,160,80,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,160,80,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 20s linear infinite;
+  }
+  @keyframes gridShift {
+    from { background-position: 0 0; }
+    to { background-position: 60px 60px; }
+  }
+
+  /* Radial glow */
+  .person-glow {
+    position: absolute; top: -10%; right: -5%;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,127,170,0.12) 0%, transparent 70%);
+    pointer-events: none; z-index: 1;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+  }
+
+  .person-content {
+    position: relative;
+    width: 100%;
+    max-width: 42rem;
+  }
+
+  .person-badge {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,160,80,0.3);
+    padding: 0.32rem 0.85rem; margin-top: 0.15rem; margin-bottom: 1rem;
+    animation: fadeUp 0.8s 0.5s ease forwards;
+    opacity: 0;
+  }
+  .person-badge::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--gold); animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  .person-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.35rem, 5.2vw, 3.85rem);
+    font-weight: 300;
+    line-height: 1.08;
+    padding-top: 0.06em;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    animation: fadeUp 0.9s 0.15s ease forwards; opacity: 0;
+  }
+  .person-name em { font-style: italic; color: var(--gold); }
+
+  .person-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.05rem, 2vw, 1.65rem);
+    font-weight: 300; font-style: italic;
+    color: var(--steel2); margin-top: 0.45rem; margin-bottom: 1.1rem;
+    letter-spacing: 0.03em;
+    animation: fadeUp 0.9s 0.3s ease forwards; opacity: 0;
+  }
+
+  .person-desc {
+    font-size: 0.98rem; font-weight: 300; line-height: 1.65;
+    color: var(--dim); max-width: 100%; margin-bottom: 0.65rem;
+    animation: fadeUp 0.9s 0.45s ease forwards; opacity: 0;
+  }
+  .person-desc strong { color: var(--white); font-weight: 500; }
+
+  .person-actions {
+    display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap;
+    animation: fadeUp 0.9s 0.62s ease forwards; opacity: 0;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
+    font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--navy); background: var(--gold);
+    padding: 0.72rem 1.55rem; text-decoration: none;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  }
+  .btn-primary:hover {
+    background: var(--gold2); transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201,160,80,0.3);
+  }
+  .btn-secondary {
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--white2);
+    text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 2px; transition: color 0.25s, border-color 0.25s;
+  }
+  .btn-secondary:hover { color: var(--gold); border-color: var(--gold); }
+
+  .person-stats {
+    position: static;
+    display: flex; flex-wrap: wrap; gap: 1.35rem 2.25rem;
+    z-index: 2;
+    margin-top: 1.1rem;
+    width: 100%;
+    max-width: 42rem;
+    animation: fadeUp 1s 0.8s ease forwards; opacity: 0;
+  }
+  .stat { text-align: left; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.35rem; font-weight: 300; color: var(--white);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--gold); }
+  .stat-label {
+    font-size: 0.65rem; font-weight: 400; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dim); margin-top: 0.2rem;
+  }
+
+  /* ── FADE UP ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { position: relative; z-index: 1; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.65rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--white);
+  }
+  .section-title em { font-style: italic; color: var(--steel2); }
+  .divider {
+    width: 60px; height: 1px; background: var(--gold);
+    margin: 1rem 0 1.65rem;
+  }
+
+  /* ── SERVICES ── */
+  #services {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%);
+  }
+  .services-header { margin-bottom: 2.25rem; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(201,160,80,0.1);
+    border: 1px solid rgba(201,160,80,0.1);
+  }
+  .service-card {
+    background: var(--navy2); padding: 1.85rem 1.75rem;
+    transition: background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .service-card:hover { background: var(--navy3); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-num {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.2em; color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .service-icon {
+    font-size: 1.8rem; margin-bottom: 1rem; display: block;
+  }
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600;
+    color: var(--white); margin-bottom: 0.8rem; line-height: 1.2;
+  }
+  .service-desc {
+    font-size: 0.88rem; line-height: 1.75;
+    color: var(--dim);
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 5rem 0;
+    background: var(--navy);
+  }
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3.25rem; align-items: start;
+  }
+  .about-text p {
+    font-size: 1rem; line-height: 1.9; color: var(--dim);
+    margin-bottom: 1.5rem;
+  }
+  .about-text p strong { color: var(--white); font-weight: 500; }
+  .about-callout {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 300; font-style: italic;
+    line-height: 1.5; color: var(--white);
+    border-left: 2px solid var(--gold);
+    padding-left: 1.8rem; margin: 1.5rem 0;
+  }
+  .value-list { list-style: none; margin-top: 1rem; }
+  .value-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.93rem; color: var(--dim); line-height: 1.6;
+  }
+  .value-list li:last-child { border-bottom: none; }
+  .value-list li::before {
+    content: '→'; color: var(--gold); flex-shrink: 0;
+    font-size: 0.9rem; margin-top: 0.05rem;
+  }
+  .value-list strong { color: var(--white); display: block; font-weight: 500; font-size: 0.95rem; }
+
+  /* ── EXPERIENCE TIMELINE ── */
+  #experience {
+    padding: 5rem 0;
+    background: var(--navy2);
+  }
+  .exp-grid {
+    margin-top: 2rem;
+    display: grid; gap: 0;
+  }
+  .exp-item {
+    display: grid; grid-template-columns: 220px 1fr;
+    gap: 0 3rem; padding: 1.65rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-item::before {
+    content: ''; position: absolute; left: 220px;
+    top: 0; bottom: 0; width: 1px;
+    background: rgba(201,160,80,0.15);
+  }
+  .exp-meta { padding-right: 3rem; }
+  .exp-period {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .exp-company {
+    font-size: 0.85rem; font-weight: 500; color: var(--white2);
+  }
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600; color: var(--white);
+    margin-bottom: 0.6rem; line-height: 1.2;
+  }
+  .exp-desc {
+    font-size: 0.9rem; line-height: 1.75; color: var(--dim);
+    margin-bottom: 1rem;
+  }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--steel2); border: 1px solid rgba(74,127,170,0.25);
+    padding: 0.25rem 0.6rem;
+  }
+  .tag-gold {
+    color: var(--gold); border-color: rgba(201,160,80,0.25);
+  }
+
+  /* ── SKILLS ── */
+  #skills {
+    padding: 5rem 0;
+    background: var(--navy);
+  }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem; margin-top: 2rem;
+  }
+  .skill-group { }
+  .skill-group-title {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(201,160,80,0.2);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    font-size: 0.8rem; font-weight: 400;
+    color: var(--white2); background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 0.35rem 0.75rem;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .skill-tag:hover {
+    background: var(--gold-dim); color: var(--gold);
+    border-color: rgba(201,160,80,0.3);
+  }
+  .skill-tag.highlight {
+    color: var(--gold); background: var(--gold-dim);
+    border-color: rgba(201,160,80,0.3);
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 5rem 0;
+    background: var(--navy2);
+    text-align: center;
+  }
+  .contact-inner { max-width: 720px; margin: 0 auto; }
+  .contact-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--white); margin-bottom: 1.1rem;
+  }
+  .contact-headline em { font-style: italic; color: var(--gold); }
+  .contact-sub {
+    font-size: 1rem; color: var(--dim); line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .contact-links {
+    display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .contact-link {
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    text-decoration: none; color: inherit;
+    transition: transform 0.2s;
+  }
+  .contact-link:hover { transform: translateY(-3px); }
+  div.contact-link { pointer-events: none; }
+  div.contact-link:hover { transform: none; }
+  .contact-link-label {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+  }
+  .contact-link-val {
+    font-size: 1rem; font-weight: 400; color: var(--white);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 1.35rem 4rem;
+    background: var(--navy);
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  footer p {
+    font-size: 0.78rem; color: rgba(255,255,255,0.25); letter-spacing: 0.05em;
+  }
+  footer p span { color: var(--gold); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    #person::after,
+    .person-glow,
+    .person-badge::before { animation: none !important; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  @media (max-width: 1024px) {
+    nav { padding: 1.2rem 2rem; align-items: center; }
+    .nav-logo { margin-right: auto; }
+    .nav-toggle { display: flex; flex-shrink: 0; }
+    .nav-cta { flex-shrink: 0; padding: 0.55rem 1rem; font-size: 0.72rem; }
+    .nav-links {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0;
+      margin: 0; padding: 5.5rem 2rem 2rem;
+      flex-direction: column; gap: 0;
+      background: rgba(7,13,26,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201,160,80,0.12);
+      list-style: none;
+    }
+    .nav-links.is-open { display: flex; }
+    .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-links a {
+      display: block; padding: 1rem 0;
+      font-size: 0.85rem;
+    }
+    #person {
+      padding: max(5.35rem, calc(env(safe-area-inset-top, 0px) + 4.5rem)) 0 2.25rem;
+    }
+    .person-stats { gap: 1.1rem 1.5rem; margin-top: 0.9rem; }
+    .container { padding: 0 2rem; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .about-inner { grid-template-columns: 1fr; gap: 2.25rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-item::before { display: none; }
+    .exp-meta { padding-right: 0; }
+    .skills-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem 2rem; }
+  }
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .person-stats { margin-top: 1.35rem; flex-direction: row; }
+    .stat { text-align: left; }
+    .contact-links { flex-direction: column; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Pramod <span>Sayanekar</span></a>
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+    <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <ul class="nav-links" id="nav-menu">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Let's Talk</a>
+</nav>
+
+<!-- PERSON / INTRO -->
+<section id="person">
+  <div class="person-glow"></div>
+  <div class="container person-inner">
+    <div class="person-content">
+      <h1 class="person-name">Pramod<br><em>Sayanekar</em></h1>
+      <p class="person-title">Fractional CTO · Technology Advisor · AI & Data Platform Leader</p>
+      <p class="person-desc">
+        <strong>25+ years</strong> building and scaling data platforms, AI infrastructure, and
+        engineering teams — now available to drive your organization's technical strategy
+        without the overhead of a full-time executive hire.
+      </p>
+      <div class="person-badge">Available for Fractional Engagements</div>
+      <div class="person-actions">
+        <a href="#contact" class="btn-primary">Engage Me ↗</a>
+        <a href="#services" class="btn-secondary">See How I Can Help</a>
+      </div>
+    </div>
+    <div class="person-stats">
+      <div class="stat">
+        <div class="stat-num">25<span>+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5<span>+</span></div>
+        <div class="stat-label">VP/Director/Lead Roles</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1</div>
+        <div class="stat-label">AI Company Founded</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <p class="section-label">// 01 — Engagement Areas</p>
+      <h2 class="section-title">What I Bring<br><em>to Your Organization</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">01</div>
+        <span class="service-icon">🤖</span>
+        <h3 class="service-title">AI Strategy & Implementation</h3>
+        <p class="service-desc">LLM/agent architecture, MCP servers, RAG pipelines, and AI product roadmaps — from proof-of-concept to production-grade systems that actually move business metrics.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-num">02</div>
+        <span class="service-icon">🏗️</span>
+        <h3 class="service-title">Data Platform Build-Out</h3>
+        <p class="service-desc">0→1 data lake/lakehouse design, real-time streaming, and self-service analytics. Turn raw data into the intelligence your business runs on.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-num">03</div>
+        <span class="service-icon">🔍</span>
+        <h3 class="service-title">Technical Due Diligence</h3>
+        <p class="service-desc">Architecture reviews, team assessments, and risk audits for investors and acquirers — unbiased, experienced, and actionable.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">04</div>
+        <span class="service-icon">🚀</span>
+        <h3 class="service-title">Engineering Team Scaling</h3>
+        <p class="service-desc">Hiring strategy, org design, culture-building, and hands-on mentorship. Build teams that are productive, motivated, and outlast your initial roadmap.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-num">05</div>
+        <span class="service-icon">☁️</span>
+        <h3 class="service-title">Cloud & Infrastructure Modernization</h3>
+        <p class="service-desc">AWS migrations, cost optimization, Kubernetes/containerization, and CI/CD overhauls. Reduce waste, improve reliability, and set up for scale.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-num">06</div>
+        <span class="service-icon">🤝</span>
+        <h3 class="service-title">CTO-as-a-Service</h3>
+        <p class="service-desc">Serve as your de facto technical co-founder or first CTO on a part-time basis. Strategic direction, vendor selection, architecture decisions, and board-level reporting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div>
+        <p class="section-label reveal">// 02 — About</p>
+        <h2 class="section-title reveal">Senior Technical<br><em>Leadership, Flexibly</em></h2>
+        <div class="divider reveal"></div>
+        <div class="about-text">
+          <p class="reveal">I've spent over two decades in the trenches of distributed systems, big data engineering, and AI infrastructure — leading data platform organizations at fintech companies like <strong>Stash Invest</strong>, and currently operating as <strong>Founder & CTO</strong> of Zzorph, a unified multi-model AI platform.</p>
+          <blockquote class="about-callout reveal">
+            "In an era where data is the new currency, the right technical leadership separates companies that move fast from those that move blind."
+          </blockquote>
+          <p class="reveal">I work with startups and growth-stage companies who need <strong>executive-caliber technical leadership</strong> without the full-time commitment. Whether that's defining architecture, building out your data strategy, or standing up an AI capability, I bring both the strategic vision and the hands-on chops to get it done.</p>
+        </div>
+      </div>
+      <div>
+        <p class="section-label reveal">// Value Delivered</p>
+        <ul class="value-list">
+          <li class="reveal reveal-delay-1"><div><strong>Real-time data at scale</strong> Event-driven architectures that power fraud detection, real-time analytics, and operational intelligence across millions of users.</div></li>
+          <li class="reveal reveal-delay-2"><div><strong>AI agents that actually work</strong> Built and shipped agentic AI systems for research, document generation, financial Q&A, and system monitoring in production.</div></li>
+          <li class="reveal reveal-delay-3"><div><strong>Self-service data cultures</strong> Designed platforms where engineers and data scientists operate independently — reducing bottlenecks and multiplying team output.</div></li>
+          <li class="reveal reveal-delay-4"><div><strong>Cost-efficient cloud infrastructure</strong> Led multiple cost optimization initiatives that reduced infrastructure spend while improving performance and reliability.</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label reveal">// 03 — Career</p>
+    <h2 class="section-title reveal">Track Record of<br><em>Technical Leadership</em></h2>
+    <div class="divider reveal"></div>
+    <div class="exp-grid">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-period">2024 — Present</div>
+          <div class="exp-company">ZzorphAI</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Founder & CTO</h3>
+          <p class="exp-desc">Founded and built a unified multi-model AI platform from scratch. Architected model routing, Plaid financial integrations, skilled AI agents (research, Office outputs, diagrams), and custom agentic node pipelines. Shipped production features across web and WhatsApp.</p>
+          <div class="exp-tags">
+            <span class="tag tag-gold">AI / LLM</span>
+            <span class="tag">LangChain</span><span class="tag">LangGraph</span>
+            <span class="tag">RAG</span><span class="tag">Node.js</span>
+            <span class="tag">PostgreSQL</span><span class="tag">Pinecone</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-period">2019 — 2024</div>
+          <div class="exp-company">Stash Invest, NY</div>
+        </div>
+        <div>
+          <h3 class="exp-role">VP, Data Platform & Engineering</h3>
+          <p class="exp-desc">Expanded data infrastructure beyond analytics to serve CX, marketing, security, compliance, and finance teams. Revamped event-driven architectures, led fraud detection improvements, and drove self-service data platform adoption across the organization.</p>
+          <div class="exp-tags">
+            <span class="tag tag-gold">Fintech</span>
+            <span class="tag">Apache Spark</span><span class="tag">Kafka</span>
+            <span class="tag">dbt</span><span class="tag">Kubernetes</span>
+            <span class="tag">Data Mesh</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-period">2018 — 2019</div>
+          <div class="exp-company">Stash Invest, NY</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Director, Data Platform & Engineering</h3>
+          <p class="exp-desc">Built a high-performance data engineering team from the ground up. Led development of a scalable data lake supporting ML & AI use cases, and architected event-driven data pipelines with real-time streaming solutions.</p>
+          <div class="exp-tags">
+            <span class="tag">Data Lake</span><span class="tag">Apache Spark</span>
+            <span class="tag">Kafka</span><span class="tag">Airflow</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-period">2016 — 2018</div>
+          <div class="exp-company">Grubhub, NY</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Data Platform Engineering Lead</h3>
+          <p class="exp-desc">Designed a self-service data platform enabling engineers and data scientists to operate independently. Built scalable orchestration systems and mentored the team on advanced data processing with Hadoop and Spark.</p>
+          <div class="exp-tags">
+            <span class="tag">Self-Service Platform</span>
+            <span class="tag">Spark</span><span class="tag">Presto</span><span class="tag">Hive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-period">2015 — 2016</div>
+          <div class="exp-company">Tremor Video, NY</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Senior Data Architect</h3>
+          <p class="exp-desc">Designed next-gen data pipelines with Spark & Kafka. Migrated on-prem ML workloads to AWS, improving cost efficiency and scalability. Set up Datadog monitoring and optimized ad targeting with Elasticsearch & Solr.</p>
+          <div class="exp-tags">
+            <span class="tag">AWS Migration</span>
+            <span class="tag">Spark</span><span class="tag">Kafka</span>
+            <span class="tag">Elasticsearch</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label reveal">// 04 — Tech Stack</p>
+    <h2 class="section-title reveal">Deep Technical<br><em>Expertise</em></h2>
+    <div class="divider reveal"></div>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <div class="skill-group-title">AI / Machine Learning</div>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">LangChain</span>
+          <span class="skill-tag highlight">LangGraph</span>
+          <span class="skill-tag highlight">RAG</span>
+          <span class="skill-tag highlight">MCP Servers</span>
+          <span class="skill-tag highlight">Agentic AI</span>
+          <span class="skill-tag">CrewAI</span>
+          <span class="skill-tag">LlamaIndex</span>
+          <span class="skill-tag">MLflow</span>
+          <span class="skill-tag">Kubeflow</span>
+          <span class="skill-tag">SageMaker</span>
+          <span class="skill-tag">LLM Fine-tuning</span>
+          <span class="skill-tag">OpenAI</span>
+          <span class="skill-tag">Anthropic Claude</span>
+          <span class="skill-tag">Gemini</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="skill-group-title">Big Data & Streaming</div>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Apache Spark</span>
+          <span class="skill-tag highlight">Kafka</span>
+          <span class="skill-tag">Hadoop</span>
+          <span class="skill-tag">Apache Flink</span>
+          <span class="skill-tag">Presto</span>
+          <span class="skill-tag">Hive</span>
+          <span class="skill-tag">dbt</span>
+          <span class="skill-tag">Delta Lake</span>
+          <span class="skill-tag">Apache Iceberg</span>
+          <span class="skill-tag">Apache Hudi</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Cloud & Infrastructure</div>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">AWS</span>
+          <span class="skill-tag highlight">Kubernetes</span>
+          <span class="skill-tag highlight">Docker</span>
+          <span class="skill-tag">Terraform</span>
+          <span class="skill-tag">EC2 / EMR</span>
+          <span class="skill-tag">Redshift</span>
+          <span class="skill-tag">Lambda</span>
+          <span class="skill-tag">Kinesis</span>
+          <span class="skill-tag">S3 / Glue</span>
+          <span class="skill-tag">Databricks</span>
+          <span class="skill-tag">Snowflake</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="skill-group-title">Languages & Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Python</span>
+          <span class="skill-tag highlight">Scala</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">DynamoDB</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Vector DBs</span>
+          <span class="skill-tag">Elasticsearch</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <h2 class="contact-headline reveal">Ready to Build<br><em>Something Great?</em></h2>
+      <p class="contact-sub reveal">Whether you need a Fractional CTO to lead your technical strategy, an advisor for a critical architecture decision, or someone to evaluate a potential acquisition — let's talk.</p>
+      <div class="contact-links reveal">
+        <a href="mailto:pramod@zzorph.ai" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-val">pramod@zzorph.ai</span>
+        </a>
+        <a href="https://www.linkedin.com/in/pramod-sayanekar-4260921/" class="contact-link" rel="noopeneroreferrer" target="_blank">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-val">/in/pramodsayanekar</span>
+        </a>
+        <div class="contact-link" style="cursor:default">
+          <span class="contact-link-label">Location</span>
+          <span class="contact-link-val">New York / NJ Area</span>
+        </div>
+      </div>
+      <a href="mailto:pramod@zzorph.ai" class="btn-primary reveal" style="display:inline-flex">Send a Message ↗</a>
+    </div>
+  <iv>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Pramod Sayanekar</span>. Fractional CTO & Technology Advisor.</p>
+  <p>Built to showcase · All rights reserved</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ooth active nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  function setActiveNav() {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      const on = a.getAttribute('href') === '#' + current;
+      a.classList.toggle('active', on);
+      if (!on) a.style.color = '';
+    });
+  }
+  window.addEventListener('scroll', setActiveNav);
+  setActiveNav();
+
+  // Mobile menu
+  const nav = document.querySelector('nav');
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.getElementById('nav-menu');
+  if (toggle && menu) {
+    function closeMenu() {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+      menu.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    function openMenu() {
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+      menu.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    toggle.addEventListener('click', () => {
+      if (menu.classList.contains('is-open')) closeMenu();
+      else openMenu();
+    });
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 1024px)').matches) closeMenu();
+      });
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024) closeMenu();
+    });
+  }
+</script>
+</body>
+</html>
+
