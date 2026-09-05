@@ -3,7 +3,14 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pramod Sayanekar — Fractional CTO & Technology Advisor</title>
+<title>Pramod Sayanekar — Technology Advisor &amp; AI / Data Platform Leader</title>
+<meta name="description" content="Pramod Sayanekar — technology executive with 25+ years in AI/ML infrastructure, big data platform engineering, and distributed systems. Founder &amp; CTO of Zzorph; formerly VP Data Platform at Stash Invest, Grubhub, and Tremor Video."/>
+<link rel="canonical" href="https://pramodsayanekar.com/"/>
+<meta property="og:type" content="profile"/>
+<meta property="og:url" content="https://pramodsayanekar.com/"/>
+<meta property="og:title" content="Pramod Sayanekar — Technology Advisor &amp; AI / Data Platform Leader"/>
+<meta property="og:description" content="25+ years in AI/ML infrastructure, big data platform engineering, and distributed systems. Founder &amp; CTO of Zzorph; formerly VP Data Platform at Stash Invest."/>
+<meta name="twitter:card" content="summary"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -286,6 +293,7 @@
     transition: transform 0.4s ease;
   }
   .service-card:hover { background: var(--navy3); }
+  .services-grid > .service-card:last-child { grid-column: 1 / -1; }
   .service-card:hover::before { transform: scaleX(1); }
   .service-num {
     font-family: 'DM Mono', monospace; font-size: 0.65rem;
@@ -369,6 +377,22 @@
   .exp-company {
     font-size: 0.85rem; font-weight: 500; color: var(--white2);
   }
+  .exp-company a {
+    color: var(--white2); text-decoration: none;
+    border-bottom: 1px solid rgba(201,160,80,0.35);
+    transition: color 0.25s, border-color 0.25s;
+  }
+  .exp-company a:hover { color: var(--gold); border-color: var(--gold); }
+  .exp-earlier { list-style: none; display: grid; gap: 0.6rem; margin-top: 0.85rem; }
+  .exp-earlier li {
+    font-size: 0.85rem; color: var(--dim); line-height: 1.7;
+    padding-left: 1rem; position: relative;
+  }
+  .exp-earlier li::before {
+    content: ''; position: absolute; left: 0; top: 0.62em;
+    width: 4px; height: 4px; background: var(--gold); opacity: 0.55;
+  }
+  .exp-earlier strong { color: var(--white2); font-weight: 500; }
   .exp-role {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem; font-weight: 600; color: var(--white);
@@ -399,6 +423,11 @@
     gap: 1.5rem; margin-top: 2rem;
   }
   .skill-group { }
+  .edu-block { margin-top: 2.5rem; max-width: 46rem; }
+  .edu-line {
+    font-size: 0.92rem; color: var(--white2); line-height: 1.8;
+  }
+  .edu-line strong { color: var(--white); font-weight: 500; }
   .skill-group-title {
     font-family: 'DM Mono', monospace; font-size: 0.7rem;
     letter-spacing: 0.18em; text-transform: uppercase;
@@ -461,21 +490,6 @@
     font-size: 1rem; font-weight: 400; color: var(--white);
   }
 
-  /* ── FOOTER ── */
-  footer {
-    padding: 1.35rem 4rem;
-    background: var(--navy);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-  footer p {
-    font-size: 0.78rem; color: rgba(255,255,255,0.25); letter-spacing: 0.05em;
-  }
-  footer p span { color: var(--gold); }
-
   /* ── SCROLL REVEAL ── */
   .reveal {
     opacity: 0; transform: translateY(30px);
@@ -529,7 +543,6 @@
     .exp-item::before { display: none; }
     .exp-meta { padding-right: 0; }
     .skills-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem 2rem; }
   }
   @media (max-width: 640px) {
     .services-grid { grid-template-columns: 1fr; }
@@ -551,7 +564,6 @@
   <ul class="nav-links" id="nav-menu">
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Let's Talk</a>
@@ -563,15 +575,15 @@
   <div class="container person-inner">
     <div class="person-content">
       <h1 class="person-name">Pramod<br><em>Sayanekar</em></h1>
-      <p class="person-title">Technology Advisor · AI & Data Platform Leader · Lifelong Learner</p>
+      <p class="person-title">Founder &amp; CTO · Technology Advisor · AI &amp; Data Platform Leader</p>
       <p class="person-desc">
-        Seasoned technology executive with <strong>25+ years</strong> of experience available for Fractional CTO and Advisory
-        engagements. Brings board- and C-suite-ready leadership in AI/ML infrastructure, big data platform
-        engineering, and distributed systems. Proven track record building and scaling high-performance
-        engineering teams at various companies, and currently operating as a hands-on Founder-CTO of an AI
-        SaaS platform.
+        Seasoned technology executive with <strong>25+ years</strong> of experience, bringing board- and
+        C-suite-ready leadership in AI/ML infrastructure, big data platform engineering, and distributed
+        systems. Proven track record building and scaling high-performance engineering teams across fintech,
+        ad tech, and healthcare — and currently operating as a hands-on Founder &amp; CTO of an AI SaaS platform.
       </p>
       <div class="person-actions">
+        <a href="#contact" class="btn-primary">Start a Conversation ↗</a>
         <a href="#services" class="btn-secondary">See How I Can Help</a>
       </div>
     </div>
@@ -637,6 +649,12 @@
         <h3 class="service-title">Agentic AI Architecture</h3>
         <p class="service-desc">Multi-agent systems, tool-use orchestration, memory layers, and eval loops — design production agent stacks that reason, act, and stay grounded in your data.</p>
       </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">07</div>
+        <span class="service-icon">🛡️</span>
+        <h3 class="service-title">Data &amp; AI Governance</h3>
+        <p class="service-desc">Catalogs, lineage, data contracts, and quality frameworks — plus the access controls and audit trails that keep sensitive data defensible under regulatory scrutiny. Extended to responsible AI governance, so your models stay explainable and auditable as they scale.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -647,14 +665,13 @@
     <div class="about-inner">
       <div>
         <p class="section-label reveal">// 02 — About</p>
-        <h2 class="section-title reveal">Senior Technical<br><em>Leadership, Flexibly</em></h2>
+        <h2 class="section-title reveal">Senior Technical<br><em>Leadership</em></h2>
         <div class="divider reveal"></div>
         <div class="about-text">
           <p class="reveal">I've spent over two decades in the trenches of distributed systems, big data engineering, and AI infrastructure — leading data platform organizations at fintech companies like <strong>Stash Invest</strong>, and currently operating as <strong>Founder & CTO</strong> of Zzorph, a unified multi-model AI platform.</p>
           <blockquote class="about-callout reveal">
             "In an era where data is the new currency, the right technical leadership separates companies that move fast from those that move blind."
           </blockquote>
-          <p class="reveal">I work with startups and growth-stage companies who need <strong>executive-caliber technical leadership</strong> without the full-time commitment. Whether that's defining architecture, building out your data strategy, or standing up an AI capability, I bring both strategic vision and the hands-on chops to get it done.</p>
         </div>
       </div>
       <div>
@@ -670,104 +687,11 @@
   </div>
 </section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="container">
-    <p class="section-label reveal">// 03 — Career</p>
-    <h2 class="section-title reveal">Track Record of<br><em>Technical Leadership</em></h2>
-    <div class="divider reveal"></div>
-    <div class="exp-grid">
-
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-period">2024 — Present</div>
-          <div class="exp-company">ZzorphAI</div>
-        </div>
-        <div>
-          <h3 class="exp-role">Founder & CTO</h3>
-          <p class="exp-desc">Founded and built a unified multi-model AI platform from scratch on web and mobile. Architected model routing, Plaid financial integrations, skilled AI agents (research, Office outputs, diagrams), and custom agentic node pipelines. Shipped production features across web and WhatsApp.</p>
-          <div class="exp-tags">
-            <span class="tag tag-gold">AI / LLM</span>
-            <span class="tag">LangChain</span><span class="tag">LangGraph</span>
-            <span class="tag">RAG</span><span class="tag">Node.js</span>
-            <span class="tag">PostgreSQL</span><span class="tag">Pinecone</span>
-            <span class="tag">Skilled Agents</span><span class="tag">Custom Agents</span>
-            <span class="tag">iOS and Android apps</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-period">2019 — 2024</div>
-          <div class="exp-company">Stash Invest, NY</div>
-        </div>
-        <div>
-          <h3 class="exp-role">VP, Data Platform & Engineering</h3>
-          <p class="exp-desc">Expanded data infrastructure beyond analytics to serve CX, marketing, security, compliance, and finance teams. Revamped event-driven architectures, led fraud detection improvements, and drove self-service data platform adoption across the organization.</p>
-          <div class="exp-tags">
-            <span class="tag tag-gold">Fintech</span>
-            <span class="tag">Apache Spark</span><span class="tag">Kafka</span>
-            <span class="tag">dbt</span><span class="tag">Kubernetes</span>
-            <span class="tag">Data Governance</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-period">2018 — 2019</div>
-          <div class="exp-company">Stash Invest, NY</div>
-        </div>
-        <div>
-          <h3 class="exp-role">Director, Data Platform & Engineering</h3>
-          <p class="exp-desc">Architected a scalable data plaform. Built a high-performance data engineering/ops team from the ground up. Led development of a scalable data lake supporting ML & AI use cases, and architected event-driven data pipelines with real-time streaming solutions.</p>
-          <div class="exp-tags">
-            <span class="tag">Data Lake</span><span class="tag">Apache Spark</span>
-            <span class="tag">Kafka</span><span class="tag">Airflow</span><span class="tag">AWS Cloud</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-period">2016 — 2018</div>
-          <div class="exp-company">Grubhub, NY</div>
-        </div>
-        <div>
-          <h3 class="exp-role">Data Platform Engineering Lead</h3>
-          <p class="exp-desc">Designed a self-service data platform enabling engineers and data scientists to operate independently. Built scalable orchestration systems and mentored the team on advanced data processing with Hadoop and Spark.</p>
-          <div class="exp-tags">
-            <span class="tag">Self-Service Platform</span>
-            <span class="tag">Spark</span><span class="tag">Presto</span><span class="tag">Hive</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-period">2015 — 2016</div>
-          <div class="exp-company">Tremor Video, NY</div>
-        </div>
-        <div>
-          <h3 class="exp-role">Senior Data Architect</h3>
-          <p class="exp-desc">Designed next-gen data pipelines with Spark & Kafka. Migrated on-prem ML workloads to AWS, improving cost efficiency and scalability. Set up Datadog monitoring and optimized ad targeting with Elasticsearch & Solr.</p>
-          <div class="exp-tags">
-            <span class="tag">AWS Migration</span>
-            <span class="tag">Spark</span><span class="tag">Kafka</span>
-            <span class="tag">Elasticsearch</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- SKILLS -->
 <section id="skills">
   <div class="container">
-    <p class="section-label reveal">// 04 — Tech Stack</p>
+    <p class="section-label reveal">// 03 — Tech Stack</p>
     <h2 class="section-title reveal">Deep Technical<br><em>Expertise</em></h2>
     <div class="divider reveal"></div>
     <div class="skills-grid">
@@ -788,6 +712,14 @@
           <span class="skill-tag">OpenAI</span>
           <span class="skill-tag">Anthropic Claude</span>
           <span class="skill-tag">Gemini</span>
+          <span class="skill-tag">xAI Grok</span>
+          <span class="skill-tag">Prompt &amp; Context Engineering</span>
+          <span class="skill-tag">Embeddings</span>
+          <span class="skill-tag">Guardrails / HITL</span>
+          <span class="skill-tag">Model Registry</span>
+          <span class="skill-tag">Feature Store</span>
+          <span class="skill-tag">Model Monitoring</span>
+          <span class="skill-tag">CI/CD for ML</span>
         </div>
       </div>
       <div class="skill-group reveal reveal-delay-1">
@@ -803,6 +735,12 @@
           <span class="skill-tag">Delta Lake</span>
           <span class="skill-tag">Apache Iceberg</span>
           <span class="skill-tag">Apache Hudi</span>
+          <span class="skill-tag">PySpark</span>
+          <span class="skill-tag">Trino</span>
+          <span class="skill-tag">Spark Structured Streaming</span>
+          <span class="skill-tag">AWS Kinesis</span>
+          <span class="skill-tag">Debezium</span>
+          <span class="skill-tag">Parquet / ORC / Avro</span>
         </div>
       </div>
       <div class="skill-group reveal">
@@ -836,6 +774,45 @@
           <span class="skill-tag">Elasticsearch</span>
         </div>
       </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Governance, Security &amp; Compliance</div>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Data Governance</span>
+          <span class="skill-tag highlight">Unity Catalog</span>
+          <span class="skill-tag">Apache Polaris</span>
+          <span class="skill-tag">DataHub</span>
+          <span class="skill-tag">AWS Glue Catalog</span>
+          <span class="skill-tag">Data Lineage</span>
+          <span class="skill-tag">Data Contracts</span>
+          <span class="skill-tag">Data Quality</span>
+          <span class="skill-tag">RBAC / Access Controls</span>
+          <span class="skill-tag">PII / PHI Handling</span>
+          <span class="skill-tag">GDPR</span>
+          <span class="skill-tag">CCPA</span>
+          <span class="skill-tag">PCI DSS</span>
+          <span class="skill-tag">HIPAA</span>
+          <span class="skill-tag">SOC 2 (familiarity)</span>
+          <span class="skill-tag">Responsible AI Governance</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="skill-group-title">Domain Expertise</div>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Financial Services</span>
+          <span class="skill-tag highlight">Fintech</span>
+          <span class="skill-tag">Investment &amp; Trading</span>
+          <span class="skill-tag">Regulatory Compliance</span>
+          <span class="skill-tag">Blockchain &amp; Digital Assets</span>
+          <span class="skill-tag">DeFi &amp; Stablecoins</span>
+          <span class="skill-tag">On-Chain Data Analysis</span>
+          <span class="skill-tag">AI / ML Infrastructure</span>
+          <span class="skill-tag">Data Platform Engineering</span>
+        </div>
+      </div>
+    </div>
+    <div class="edu-block reveal">
+      <div class="skill-group-title">Education</div>
+      <p class="edu-line"><strong>Bachelor of Engineering</strong>, Electronics &amp; Telecommunications — University of Pune, India</p>
     </div>
   </div>
 </section>
@@ -844,6 +821,7 @@
 <section id="contact">
   <div class="container">
     <div class="contact-inner">
+      <p class="contact-sub reveal">Building a data platform, pushing AI into production, or rethinking how your engineering org is structured? I'm always glad to compare notes with people working on the same problems.</p>
       <div class="contact-links reveal">
         <a href="mailto:pramod@zzorph.ai" class="contact-link">
           <span class="contact-link-label">Email</span>
@@ -851,7 +829,7 @@
         </a>
         <a href="https://www.linkedin.com/in/pramod-sayanekar-4260921/" class="contact-link" rel="noopener noreferrer" target="_blank">
           <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-val">/in/pramodsayanekar</span>
+          <span class="contact-link-val">/in/pramod-sayanekar-4260921</span>
         </a>
         <div class="contact-link" style="cursor:default">
           <span class="contact-link-label">Location</span>
@@ -862,11 +840,6 @@
     </div>
   </div>
 </section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 <span>Pramod Sayanekar</span>. All rights reserved.</p>
-</footer>
 
 <script>
   // Scroll reveal
